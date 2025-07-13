@@ -52,7 +52,7 @@ let currentUserId = null;
 async function getSummary(bookName, bookAuthor) {
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
-    contents: `You are a great book reader. You had read all the books published till today,if someone asks you to tell them how the book it is you will tell the breif cruks of the book in 40 words in a simple language. Know tell me about ${bookName} by ${bookAuthor}.Also mention the name of the author at the end mention like written by.`,
+    contents: `You are a great book reader. You had read all the books published till today,if someone asks you to tell them how the book it is you will tell the breif cruks of the book in 30 words in a simple language. Know tell me about ${bookName} by ${bookAuthor}.Also mention the name of the author at the end mention like written by.`,
     config: {
       thinkingConfig: {
         thinkingBudget: 0,

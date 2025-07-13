@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= name %>'s Stack
+    </title>
+    <link rel="icon" href="/public/icons-header.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <h1>
+            <%= name %>'s Stack
+        </h1>
+    </header>
+    <section>
+        <div class="redirect">
+            <form action="/add-book" method="GET">
+                <button type="submit" class="add">Add New</button>
+            </form>
+            <form action="/logout" method="POST">
+                <button type="submit" class="logout">Logout</button>
+            </form>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="books-grid">
+
+
+            <% books.forEach(book=> { %>
+                <div class="book-card">
+                    <div class="div1">
+                        <img src="<%= book.cover_link %>" alt="Book Cover" class="cover" />
+                    </div>
+                    <div class="div2">
+                        <h2 class="title">
+                            <%= book.bookname %>
+                        </h2>
+                    </div>
+                    <div class="div3">
+                        <p class="summary">
+                            <%= book.bookreview %>
+                        </p>
+                    </div>
+                    <div class="div4">
+                        <form action="/delete" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit" name="bookId" value="<%= book.book_id %>">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </main>
+    <div class="redirect">
+        <!-- <button class="add">Add New</button> -->
+        <form action="/logout" method="POST">
+            <button type="submit" class="logout">Logout</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
+<!-- <p class="rating">Rating: 9/10</p>
+<p class="read-on">Read On: 18-05-2010</p> -->

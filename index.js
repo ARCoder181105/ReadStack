@@ -1,7 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
 import pg from 'pg';
-import bodyParser from 'body-parser';
 import axios from 'axios'
 import { GoogleGenAI } from "@google/genai";
 import path from 'path';

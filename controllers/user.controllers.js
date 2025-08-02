@@ -19,21 +19,23 @@ export const getSignup = (req, res) => {
 
 
 export const getHome = async (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/');
-    }
-
     try {
-        const response = await db.query('SELECT * FROM userBooks WHERE user_id = $1', [req.session.userId]);
-        const books = response.rows;
-        res.render('index.ejs', { name: req.session.username, books: books });
-        // console.table(books);
-        // console.status(200);
+        const userId = req.user.id;
+        const username = req.user.username;
 
+        const response = await db.query(
+            'SELECT * FROM userBooks WHERE user_id = $1',
+            [userId]
+        );
+
+        const books = response.rows;
+
+        res.render('index.ejs', { name: username, books });
     } catch (error) {
-        console.log(`Internal server error ${error.stack}`);
+        console.error(`Internal server error: ${error.stack}`);
+        res.status(500).send("Failed to load home page");
     }
-}
+};
 
 
 
@@ -61,7 +63,7 @@ export const login = async (req, res) => {
             maxAge: 60 * 60 * 1000,
         });
 
-        res.redirect('/api/home'); // or wherever your index/home page is
+        res.redirect('/api/home');
     } catch (err) {
         console.error('Login error:', err);
         res.status(500).json({ error: 'Internal server error' });

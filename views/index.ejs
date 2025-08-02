@@ -21,10 +21,10 @@
     </header>
     <section>
         <div class="redirect">
-            <form action="/add-book" method="GET">
+            <form action="/api/add-book" method="GET">
                 <button type="submit" class="add">Add New</button>
             </form>
-            <form action="/logout" method="POST">
+            <form action="/api/logout" method="POST">
                 <button type="submit" class="logout">Logout</button>
             </form>
         </div>
@@ -50,7 +50,7 @@
                         </p>
                     </div>
                     <div class="div4">
-                        <form action="/delete" method="POST">
+                        <form action="/api/delete" method="POST">
                             <input type="hidden" name="_method" value="DELETE" />
                             <button type="submit" name="bookId" value="<%= book.book_id %>">Delete</button>
                         </form>
@@ -61,7 +61,7 @@
     </main>
     <div class="redirect">
         <!-- <button class="add">Add New</button> -->
-        <form action="/logout" method="POST">
+        <form action="/api/logout" method="POST">
             <button type="submit" class="logout">Logout</button>
         </form>
     </div>

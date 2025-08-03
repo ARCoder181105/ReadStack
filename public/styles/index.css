@@ -137,7 +137,7 @@ body {
 }
 
 /* Delete Button */
-form[action="/delete"] button {
+form[action="/api/delete"] button {
  padding: clamp(0.5rem, 1vw, 0.8rem) clamp(1rem, 2vw, 1.5rem);
   background-color: #e74c3c;
   color: white;
@@ -151,12 +151,12 @@ form[action="/delete"] button {
   font-weight: 700;
 }
 
-form[action="/delete"] button:hover {
+form[action="/api/delete"] button:hover {
     background-color: #c0392b;
     transform: scale(1.05);
 }
 
-form[action="/delete"] button:active {
+form[action="/api/delete"] button:active {
     background-color: #a93226;
     transform: scale(0.97);
 }

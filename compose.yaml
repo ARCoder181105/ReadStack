@@ -1,0 +1,39 @@
+services:
+  server:
+    build:
+      context: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      # This connection string matches the credentials in the 'db' service below
+      - DATABASE_URL=postgres://myuser:mypassword@db:5432/readstack
+      - PORT=3000
+      - NODE_ENV=development
+      # Add other keys from your .env file here (e.g., JWT secrets)
+      - JWT_SECRET=change_this_to_a_real_secret
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:alpine
+    restart: always
+    # These variables initialize the database automatically
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=readstack
+    ports:
+      - "5432:5432"
+    volumes:
+      # This ensures your data survives if you restart the container
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d readstack"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
